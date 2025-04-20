@@ -1,54 +1,15 @@
-import { useState } from "react";
-
-const tabs = ["Agenda", "Checklist", "Compras", "Mapa", "Memórias", "Extras"];
+import { diasAgenda } from './agendaCompleta';
 
 function App() {
-  const [activeTab, setActiveTab] = useState("Agenda");
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case "Agenda":
-        return <p>📅 Aqui vai o roteiro dia a dia com atrações e horários.</p>;
-      case "Checklist":
-        return <p>🧳 Itens essenciais para a viagem e documentos.</p>;
-      case "Compras":
-        return <p>🛍️ Lojas como Ross, TJMaxx, Target e lista inteligente.</p>;
-      case "Mapa":
-        return <p>📍 Mapa com destaques em Miami, Tampa e Orlando.</p>;
-      case "Memórias":
-        return <p>📸 Espaço para fotos, frases do Tiaguinho e registros.</p>;
-      case "Extras":
-        return <p>📎 QR Code do roteiro e link do PDF completo.</p>;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div style={{ fontFamily: "Arial", padding: "1rem" }}>
+    <div style={{ padding: '1rem', fontFamily: 'Arial' }}>
       <h1>🌴 Roteiro Flórida 2025 – Família Bulcão & Fernandes</h1>
-      <div style={{ marginBottom: "1rem" }}>
-        {tabs.map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{
-              marginRight: "0.5rem",
-              padding: "0.5rem",
-              background: activeTab === tab ? "#2c3e50" : "#eee",
-              color: activeTab === tab ? "#fff" : "#000",
-              border: "none",
-              borderRadius: "6px",
-              cursor: "pointer"
-            }}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-      <div style={{ backgroundColor: "#f9f9f9", padding: "1rem", borderRadius: "6px" }}>
-        {renderContent()}
-      </div>
+      {diasAgenda.map((dia, i) => (
+        <div key={i} style={{ marginBottom: '2rem' }}>
+          <h2>{dia.titulo}</h2>
+          {dia.componente}
+        </div>
+      ))}
     </div>
   );
 }
